@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
+        name="viewport">
+    <title>奈学院聊天室</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script type="text/javascript" src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.snowfall.js"></script>
+    <script type="text/javascript" src="js/chat.util.js"></script>
+    <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <div id="loginbox">
+        <div class="wrap">
+            <h2 class="login-logo">
+                <img src="./images/nx_logo.png">
+                欢迎进入奈学 WebSocket 聊天室
+            </h2>
+            <div>
+                <div class="input-group">
+                    <input style="font-family: cursive;width:209px"type="text" class="form-control" placeholder="进入前，请先输入昵称" id="nickname" name="nickname"
+                        aria-describedby="enter">
+                    <span style="font-family: cursive;" id="enter" class="input-group-addon" onclick="CHAT.login();">进入</span>
+                </div>
+                <div id="error-msg" style="color:red;"></div>
+            </div>
+        </div>
+    </div>
+    <div id="chatbox" style="width:100%;height:100%;display: none;padding-top: 45px;box-sizing: border-box;">
+        <div style="background:#3d3d3d;height: 45px; width: 100%;font-size:12px;position: fixed;top: 0px;z-index: 999;">
+            <div style="line-height: 45px;color:#fff;font-size: 16px;">
+                <img src="./images/nx_logo.png" style="width: 18px;margin-left: 10px;"><span style="text-align:left;margin-left:5px;font-size: 19px;font-family: cursive;">奈学教育聊天室</span>
+                <span style="float:right; margin-right:10px;font-family: cursive;">
+                    <span>当前在线 <span id="onlinecount" style="color: #77b72c;">0</span> 人</span> |
+                    <span id="shownikcname">匿名</span> |
+                    <a href="javascript:;" onclick="CHAT.logout()" style="color:#fff;">退出</a>
+                </span>
+            </div>
+        </div>
+        <div id="doc">
+            <div id="chat">
+                <div id="message" class="message">
+                    <div id="onlinemsg"
+                        style="background:#EFEFF4; font-size:12px; margin-top:40px; margin-left:10px; color:#666;">
+                    </div>
+                </div>
+                <form onsubmit="return false;">
+                    <div class="tool-box">
+                        <div class="face-box" id="face-box"></div>
+                        <span class="face" onclick="CHAT.openFace()" title="选择表情"></span>
+
+                        <span class="flower" onclick="CHAT.sendFlower()" title="送鲜花"></span>
+                    </div>
+                    <div class="input-box">
+                        <div class="input" contenteditable="true" id="send-message" onkeypress="enterSendText(event)"></div>
+                        <div class="action">
+                            <input class="button" style="font-family: cursive;font-size: 17px;" type="button" id="mjr_send" onclick="CHAT.sendText()" value="发送" />
+                        </div>
+                    </div>
+                    <div class="copyright" style="font-family: cursive;font-size: 18px;">奈学教育&copy;版权所有</div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

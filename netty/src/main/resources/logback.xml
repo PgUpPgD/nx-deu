@@ -1,0 +1,26 @@
+<configuration debug="false">
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%date{yyyy-MM-dd HH:mm:ss}  %highlight(%-5level) %magenta(%-4relative) --- [%yellow(%15.15thread)] %cyan(%-40.40logger{39}) : %msg%n"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="thread" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>
+                %red(%file) l=%line %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %cyan(%msg%n)
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <logger name="e" level="debug" additivity="false">
+        <appender-ref ref="thread"/>
+    </logger>
+</configuration>

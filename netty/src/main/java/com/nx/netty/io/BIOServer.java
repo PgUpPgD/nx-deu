@@ -27,7 +27,7 @@ public class BIOServer {
         while (true){
             //通过监听器创建和客户端对应的socket 此 socket 才是真正和客户端通讯的socket
             Socket socket = serverSocket.accept();
-            int read = socket.getInputStream().read(bs);
+            socket.getInputStream().read(bs);
             String content = new String(bs);
             log.debug("content--[{}]", content);
         }

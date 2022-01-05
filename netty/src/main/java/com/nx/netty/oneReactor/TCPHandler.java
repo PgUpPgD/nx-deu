@@ -37,12 +37,20 @@ public class TCPHandler implements Runnable {
         }
     }
 
+    /**
+     * 注意：当客户端强制断开，服务端会产生读事件，socket.read(buf) 中socket此时已经为空，发生IOException
+     * 客户端正常断开，服务端会产生读事件，int numBytes = socket.read(buf); = -1
+     * 两种情况都需要  key.cancel();  socket.close(); 从Set<SelectionKey> keys 中移除key，不然会一直循环
+     *
+     * @throws IOException
+     */
     private synchronized void read() throws IOException {
         //non-blocking下不可用Readers，因为Readers不支持non-blocking
         byte[] bytes = new byte[1024];
         ByteBuffer buf = ByteBuffer.wrap(bytes);
         //读取字符串
         int numBytes = socket.read(buf);
+        //numBytes = 0 表示没有发消息，= -1表示客户端正常.close关闭
         if (numBytes == -1){
             System.out.println("[Warning!] A client has been closed.");
             closeChannel();

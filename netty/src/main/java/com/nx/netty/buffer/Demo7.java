@@ -2,7 +2,7 @@ package com.nx.netty.buffer;
 
 import java.nio.ByteBuffer;
 
-public class Dome8 {
+public class Demo7 {
     public static void main(String[] args) throws Exception {
         byte[] bytes = new byte[]{'a', 'b', 'c'};
         ByteBuffer byteBuffer = ByteBuffer.wrap(bytes);

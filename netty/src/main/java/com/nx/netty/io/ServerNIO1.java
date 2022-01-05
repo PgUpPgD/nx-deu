@@ -31,14 +31,14 @@ public class ServerNIO1 {
 
     //存放历史客户端socket的容器,因为是while(true),不保留历史socket，会导致消息丢失
     static List<SocketChannel> list = new ArrayList<>();
-    //
+    //创建缓冲
     static ByteBuffer readbuf = ByteBuffer.allocate(1024);
 
     public static void main(String[] args) {
         try {
             //监听有没有客户端连接
             listener = ServerSocketChannel.open();
-            //设置非阻塞
+            //设置非阻塞 listener.accept()可继续向下执行
             listener.configureBlocking(false);
             listener.bind(new InetSocketAddress("127.0.0.1", 8080));
             log.debug("server start");

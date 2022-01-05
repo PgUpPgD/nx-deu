@@ -2,10 +2,8 @@ package com.nx.netty.io;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -19,8 +17,7 @@ import java.util.concurrent.Executors;
 @Slf4j(topic = "e")
 public class ServerNIO {
 
-    static byte[] bs = new byte[1024];
-    static ExecutorService executorService = Executors.newCachedThreadPool();
+    private static ExecutorService executorService = Executors.newCachedThreadPool();
 
     public static void main(String[] args) {
         try {
@@ -39,7 +36,6 @@ public class ServerNIO {
     }
 
     static class Task implements Runnable{
-
         Socket socket;
         public Task(Socket socket){
             this.socket = socket;
@@ -47,15 +43,12 @@ public class ServerNIO {
         @Override
         public void run() {
             try {
+                System.out.println("run ...");
                 //获取输入流
                 InputStream inputStream = socket.getInputStream();
-                InputStreamReader reader = new InputStreamReader(inputStream);
-                BufferedReader buffer = new BufferedReader(reader);
-                String content;
-                //buffer.readLine()此处不发消息阻塞，不会影响后面其它线程的连接
-                while ((content = buffer.readLine()) != null){
-                    log.debug("content---{}", content);
-                }
+                byte[] bytes = new byte[1024];
+                int read = inputStream.read(bytes);
+                System.out.println(read + " content: " + new String(bytes));
             }catch (IOException e){
                 e.printStackTrace();
             }

@@ -2,7 +2,7 @@ package com.nx.netty.buffer;
 
 import java.nio.ByteBuffer;
 
-public class Dome6 {
+public class Demo6 {
     public static void main(String[] args) {
         ByteBuffer byteBuffer=ByteBuffer.allocate(10);
         for(int i=0;i<byteBuffer.capacity();++i){

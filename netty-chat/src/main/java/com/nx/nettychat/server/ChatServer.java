@@ -1,5 +1,9 @@
 package com.nx.nettychat.server;
 
+import com.lmax.disruptor.BlockingWaitStrategy;
+import com.lmax.disruptor.dsl.ProducerType;
+import com.nx.nettychat.disruptor.MessageConsumer;
+import com.nx.nettychat.disruptor.RingBufferWorkerPoolFactory;
 import com.nx.nettychat.hander.ChatServerChannelInitializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelOption;
@@ -32,6 +36,20 @@ public class ChatServer implements DisposableBean {
                 //Java将使用默认值50
                 .option(ChannelOption.SO_BACKLOG, 1024)
                 .childHandler(new ChatServerChannelInitializer());
+    }
+
+    //初始化 Disruptor
+    public void initDisruptor(){
+        MessageConsumer[] conusmers = new MessageConsumer[4];
+        for(int i =0; i < conusmers.length; i++) {
+            MessageConsumer messageConsumer = new MessageConsumer("code:serverId:" + i);
+            conusmers[i] = messageConsumer;
+        }
+        RingBufferWorkerPoolFactory.getInstance().initAndStart(ProducerType.MULTI,
+                1024 * 1024,
+                //new YieldingWaitStrategy(),
+                new BlockingWaitStrategy(),
+                conusmers);
     }
 
     public void start() {

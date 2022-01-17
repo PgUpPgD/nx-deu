@@ -16,6 +16,8 @@ public class NettyBooter implements ApplicationListener<ContextRefreshedEvent> {
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		try {
+			log.info("初始化Disruptor");
+			chatServer.initDisruptor();
 			log.info("启动netty容器");
 			chatServer.start();
 		} catch (Exception e) {
@@ -23,9 +25,5 @@ public class NettyBooter implements ApplicationListener<ContextRefreshedEvent> {
 		}
 	}
 
-//	private ApplicationContext applicationContext;
-//	public void s(){
-//		applicationContext.publishEvent();
-//	}
 }
 	

@@ -20,6 +20,16 @@ import java.util.Set;
 @Slf4j
 public class MsgProcessor {
 
+    private MsgProcessor(){}
+
+    private static class SingletonHolder{
+        static final MsgProcessor instance = new MsgProcessor();
+    }
+
+    public static MsgProcessor getInstance(){
+        return SingletonHolder.instance;
+    }
+
     // 记录同时在线人数
     // ChannelGroup是一个线程安全的集合，它提供了打开一个Channel和不同批量的方法。
     // 可以使用ChannelGroup来将Channel分类到一个有特别意义的组中。
@@ -29,7 +39,7 @@ public class MsgProcessor {
     // channl，而ChannelGroup在channel关闭时会自动从组中移除，所以我们这里单独记录一下，这样我们可以判断如果某个
     // socket对应的channel关闭，我们可以通知其他人某人下线
     // 实际工作中我们都是前后端分离，不会出现这个现象
-    public static  Set onlineUserSet = new HashSet();
+    public static Set onlineUserSet = new HashSet();
 
 
     // 定义一些扩展属性

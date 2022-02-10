@@ -23,6 +23,7 @@
         <module>netty-chat</module>
         <module>disruptor</module>
         <module>netty-chat-hm</module>
+        <module>rocketmq</module>
     </modules>
 
     <properties>
@@ -70,6 +71,11 @@
             <dependency>
                 <groupId>com.itcast</groupId>
                 <artifactId>netty-chat-hm</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.nx</groupId>
+                <artifactId>rocketmq</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
@@ -169,6 +175,12 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>3.5</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>4.9.2</version>
             </dependency>
 
             <dependency>
